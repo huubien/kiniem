@@ -1,0 +1,20 @@
+import React, { useState, useEffect } from 'react';
+import LandingPage from './components/LandingPage';
+import LoveStory   from './components/LoveStory';
+import { useRomanticMusic } from './hooks/useRomanticMusic';
+
+export default function App() {
+  const [phase, setPhase] = useState('landing');
+  const [names, setNames] = useState({ boy: '', girl: '' });
+  const music = useRomanticMusic();
+
+  const start = (boy, girl) => { setNames({ boy, girl }); setPhase('story'); };
+  const reset = ()           => { setPhase('landing'); setNames({ boy: '', girl: '' }); };
+
+  return (
+    <div className="w-full h-screen overflow-hidden bg-black">
+      {phase === 'landing' && <LandingPage onStart={start} music={music} />}
+      {phase === 'story'   && <LoveStory boyName={names.boy} girlName={names.girl} onReset={reset} music={music} />}
+    </div>
+  );
+}
