@@ -75,13 +75,13 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
       /* text 1 – "March 8th ✿" */
       .fromTo(text1Ref.current,
         { opacity: 0, y: 32 },
-        { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' }, 's1+=1.5')
-      .to(text1Ref.current, { opacity: 0, y: -24, duration: 1.0, ease: 'power2.in' }, 's1+=4.5')
-      /* text 1b – "A day for someone special" */
+        { opacity: 1, y: 0, duration: 1.5, ease: 'power3.out' }, 's1+=1.0')
+      .to(text1Ref.current, { opacity: 0, y: -24, duration: 1.0, ease: 'power2.in' }, 's1+=3.5')
+      /* text 1b – "A day for someone special" (after text1 fully gone) */
       .fromTo(text1bRef.current,
         { opacity: 0, y: 28 },
-        { opacity: 1, y: 0, duration: 1.4, ease: 'power3.out' }, 's1+=4.0')
-      .to(text1bRef.current, { opacity: 0, y: -20, duration: 1, ease: 'power2.in' }, 's1+=7.6')
+        { opacity: 1, y: 0, duration: 1.4, ease: 'power3.out' }, 's1+=5.0')
+      .to(text1bRef.current, { opacity: 0, y: -20, duration: 1, ease: 'power2.in' }, 's1+=7.8')
 
     /* ════════════════════════════════════════════
        SCENE 2 – Girl appears (9 – 18 s)
@@ -93,13 +93,13 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
       /* her name */
       .fromTo(girlNameRef.current,
         { opacity: 0, y: 28, scale: 0.88 },
-        { opacity: 1, y: 0, scale: 1, duration: 1.3, ease: 'back.out(1.5)' }, 's2+=3')
-      .to(girlNameRef.current, { opacity: 0, duration: 1, ease: 'power2.in' }, 's2+=6.8')
-      /* "Because today is all about you." */
+        { opacity: 1, y: 0, scale: 1, duration: 1.3, ease: 'back.out(1.5)' }, 's2+=2')
+      .to(girlNameRef.current, { opacity: 0, duration: 1, ease: 'power2.in' }, 's2+=5.0')
+      /* "Because today is all about you." — after name fully gone */
       .fromTo(text2bRef.current,
         { opacity: 0, y: 26 },
-        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, 's2+=5.2')
-      .to(text2bRef.current, { opacity: 0, duration: 1 }, 's2+=7.8')
+        { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, 's2+=6.2')
+      .to(text2bRef.current, { opacity: 0, duration: 0.8 }, 's2+=8.0')
 
     /* ════════════════════════════════════════════
        SCENE 3 – Boy appears in distance (18 – 27 s)

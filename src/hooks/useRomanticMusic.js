@@ -185,7 +185,7 @@ export function useRomanticMusic() {
 
   const ensureAudio = () => {
     if (!audioRef.current) {
-      const a = new Audio('/music/bgm.mp3');
+      const a = new Audio(import.meta.env.BASE_URL + 'music/bgm.mp3');
       a.loop   = true;
       a.volume = 0;
       audioRef.current = a;
