@@ -96,3 +96,37 @@ canvas.layer {
   0%   { background-position: 200% center; }
   100% { background-position:   0% center; }
 }
+
+/* ── Cloud drift ── */
+@keyframes cloudDrift {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(38px); }
+}
+
+/* ── Responsive character positions ── */
+.char-pos-girl { bottom: 19%; right: 10%; }
+.char-pos-boy  { bottom: 19%; right: 28%; }
+
+/* Scale characters inside GSAP wrapper without affecting GSAP transforms */
+.char-wrap { transform-origin: bottom center; }
+
+/* ── Mobile (≤ 480px) ── */
+@media (max-width: 480px) {
+  .letterbox-top, .letterbox-bottom { height: 4vh; }
+  .char-wrap  { transform: scale(0.52); }
+  .char-pos-girl { bottom: 17%; right: 2%; }
+  .char-pos-boy  { bottom: 17%; right: 22%; }
+  .cin-text { font-size: clamp(0.85rem, 4.2vw, 1.2rem) !important; }
+}
+
+/* ── Tablet (481px – 768px) ── */
+@media (min-width: 481px) and (max-width: 768px) {
+  .char-wrap { transform: scale(0.7); }
+  .char-pos-girl { bottom: 18%; right: 5%; }
+  .char-pos-boy  { bottom: 18%; right: 26%; }
+}
+
+/* ── Small laptop (769px – 1024px) ── */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .char-wrap { transform: scale(0.85); }
+}

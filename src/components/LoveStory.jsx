@@ -11,7 +11,7 @@ import { useRomanticMusic } from '../hooks/useRomanticMusic';
 /* ── small helper: cinematic text paragraph ── */
 const CinText = React.forwardRef(({ children, className = '' }, ref) => (
   <p ref={ref}
-    className={`cin-text text-xl md:text-3xl lg:text-4xl px-6 pointer-events-none ${className}`}
+    className={`cin-text text-base sm:text-xl md:text-3xl lg:text-4xl px-4 sm:px-6 pointer-events-none ${className}`}
     style={{ maxWidth: 780, lineHeight: 1.7 }}>
     {children}
   </p>
@@ -259,13 +259,17 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
 
       {/* ── Characters ── */}
       {/* Girl – right side */}
-      <div ref={girlRef} className="absolute" style={{ bottom: '19%', right: '10%' }}>
-        <GirlCharacter pose={girlPose} />
+      <div ref={girlRef} className="absolute char-pos-girl">
+        <div className="char-wrap">
+          <GirlCharacter pose={girlPose} />
+        </div>
       </div>
 
-      {/* Boy – target position right:28%, starts far left via GSAP x */}
-      <div ref={boyRef} className="absolute" style={{ bottom: '19%', right: '28%' }}>
-        <BoyCharacter pose={boyPose} />
+      {/* Boy – target position, starts far left via GSAP x */}
+      <div ref={boyRef} className="absolute char-pos-boy">
+        <div className="char-wrap">
+          <BoyCharacter pose={boyPose} />
+        </div>
       </div>
 
       {/* ── Scene text overlays ── */}
@@ -287,7 +291,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
       <div ref={girlNameRef}
         className="absolute inset-x-0 flex flex-col items-center pointer-events-none z-20"
         style={{ top: '22%' }}>
-        <p className="cin-name text-5xl md:text-7xl font-bold text-white"
+        <p className="cin-name text-3xl sm:text-5xl md:text-7xl font-bold text-white"
           style={{ fontFamily: "'Playfair Display',serif", fontStyle:'italic' }}>
           {girlName}
         </p>
@@ -321,10 +325,10 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
       <div ref={forYouRef}
         className="absolute inset-x-0 flex flex-col items-center pointer-events-none z-20"
         style={{ top: '20%' }}>
-        <p className="cin-text text-3xl md:text-5xl">
+        <p className="cin-text text-xl sm:text-3xl md:text-5xl">
           "Happy Women's Day,
         </p>
-        <p className="cin-name text-4xl md:text-6xl font-bold text-rose-300 mt-1"
+        <p className="cin-name text-2xl sm:text-4xl md:text-6xl font-bold text-rose-300 mt-1"
           style={{ fontFamily: "'Playfair Display',serif" }}>
           {girlName} 🌸"
         </p>
@@ -354,7 +358,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
           className="text-white font-bold"
           style={{
             fontFamily: "'Playfair Display',serif",
-            fontSize: 'clamp(2rem,6vw,5rem)',
+            fontSize: 'clamp(1.3rem,5vw,5rem)',
             textShadow: '0 0 35px rgba(255,210,80,0.98), 0 0 70px rgba(255,150,60,0.55), 0 2px 4px rgba(0,0,0,0.5)',
           }}>
           {boyName}&nbsp;❤️&nbsp;{girlName}
@@ -363,7 +367,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
           className="text-rose-200/85 mt-5 tracking-[0.3em]"
           style={{
             fontFamily: "'Playfair Display',serif", fontStyle:'italic',
-            fontSize: 'clamp(1rem,2.5vw,1.9rem)',
+            fontSize: 'clamp(0.85rem,2vw,1.9rem)',
             textShadow: '0 0 20px rgba(255,150,180,0.7)',
           }}>
           You deserve all the flowers in the world
