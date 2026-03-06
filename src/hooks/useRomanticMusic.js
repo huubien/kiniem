@@ -188,6 +188,11 @@ export function useRomanticMusic() {
       const a = new Audio(import.meta.env.BASE_URL + 'music/bgm.mp3');
       a.loop   = true;
       a.volume = 0;
+      // Required for iOS Safari to play inline (not fullscreen)
+      a.setAttribute('playsinline', '');
+      a.setAttribute('webkit-playsinline', '');
+      // Preload so it's ready faster on mobile
+      a.preload = 'auto';
       audioRef.current = a;
     }
     return audioRef.current;

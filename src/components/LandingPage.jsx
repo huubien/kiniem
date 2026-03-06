@@ -44,6 +44,7 @@ export default function LandingPage({ onStart, music }) {
   const submit = (e) => {
     e.preventDefault();
     if (!boy.trim() || !girl.trim() || going) return;
+    triggerMusic(); // ensure music starts on button press (iOS fallback)
     setGoing(true);
     gsap.timeline()
       .to(btnRef.current, { scale: 0.92, duration: 0.1 })
@@ -58,6 +59,7 @@ export default function LandingPage({ onStart, music }) {
     <div ref={wrapRef}
       onClick={triggerMusic}
       onKeyDown={triggerMusic}
+      onTouchStart={triggerMusic}
       className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden"
       style={{ background: 'radial-gradient(ellipse at 50% 100%, #3a0a5e 0%, #1a0530 40%, #05001a 100%)' }}>
 
