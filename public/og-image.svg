@@ -1,0 +1,164 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#1a0535"/>
+      <stop offset="40%"  stop-color="#5c1070"/>
+      <stop offset="70%"  stop-color="#aa3030"/>
+      <stop offset="100%" stop-color="#ffd070"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="rgba(255,180,255,0.7)"/>
+      <stop offset="100%" stop-color="rgba(255,180,255,0)"/>
+    </radialGradient>
+    <radialGradient id="glowC" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"  stop-color="rgba(255,220,100,0.6)"/>
+      <stop offset="100%" stop-color="rgba(255,220,100,0)"/>
+    </radialGradient>
+    <filter id="fglow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="textglow" x="-20%" y="-60%" width="140%" height="220%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- Stars -->
+  <circle cx="80"  cy="40"  r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="200" cy="80"  r="1"   fill="white" opacity="0.6"/>
+  <circle cx="340" cy="30"  r="2"   fill="white" opacity="0.8"/>
+  <circle cx="500" cy="60"  r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="700" cy="25"  r="1"   fill="white" opacity="0.7"/>
+  <circle cx="850" cy="55"  r="2"   fill="white" opacity="0.6"/>
+  <circle cx="1000" cy="35" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="1120" cy="70" r="1"   fill="white" opacity="0.5"/>
+  <circle cx="150"  cy="130" r="1"  fill="white" opacity="0.4"/>
+  <circle cx="950"  cy="110" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="1180" cy="45" r="1"   fill="white" opacity="0.7"/>
+
+  <!-- Moon -->
+  <circle cx="1080" cy="90" r="38" fill="#FFFACD" opacity="0.85"/>
+  <circle cx="1098" cy="76" r="30" fill="#1a0535" opacity="0.75"/>
+  <circle cx="1080" cy="90" r="60" fill="rgba(255,250,200,0.06)" filter="url(#textglow)"/>
+
+  <!-- Center flower glow bg -->
+  <ellipse cx="600" cy="340" rx="260" ry="240" fill="url(#glow1)" opacity="0.5"/>
+
+  <!-- ── MAIN BIG FLOWER (center) ── -->
+  <g transform="translate(600,340)" filter="url(#fglow)">
+    <!-- petals layer 1 -->
+    <ellipse cx="0"    cy="-95"  rx="28" ry="55" fill="#FF1493" opacity="0.92"/>
+    <ellipse cx="0"    cy="95"   rx="28" ry="55" fill="#FF1493" opacity="0.92"/>
+    <ellipse cx="-95"  cy="0"    rx="55" ry="28" fill="#FF1493" opacity="0.92"/>
+    <ellipse cx="95"   cy="0"    rx="55" ry="28" fill="#FF1493" opacity="0.92"/>
+    <ellipse cx="-67"  cy="-67"  rx="32" ry="52" fill="#FF69B4" opacity="0.85" transform="rotate(-45 -67 -67)"/>
+    <ellipse cx="67"   cy="-67"  rx="32" ry="52" fill="#FF69B4" opacity="0.85" transform="rotate(45 67 -67)"/>
+    <ellipse cx="-67"  cy="67"   rx="32" ry="52" fill="#FF69B4" opacity="0.85" transform="rotate(45 -67 67)"/>
+    <ellipse cx="67"   cy="67"   rx="32" ry="52" fill="#FF69B4" opacity="0.85" transform="rotate(-45 67 67)"/>
+    <!-- center -->
+    <circle cx="0" cy="0" r="38" fill="#FFD700"/>
+    <circle cx="0" cy="0" r="22" fill="#FFF176" opacity="0.9"/>
+    <circle cx="0" cy="0" r="10" fill="#FF8C00"/>
+  </g>
+
+  <!-- ── SIDE FLOWERS ── -->
+  <!-- Left large -->
+  <g transform="translate(260,390) scale(0.78)" filter="url(#fglow)">
+    <ellipse cx="0"   cy="-80" rx="22" ry="46" fill="#E91E63" opacity="0.9"/>
+    <ellipse cx="0"   cy="80"  rx="22" ry="46" fill="#E91E63" opacity="0.9"/>
+    <ellipse cx="-80" cy="0"   rx="46" ry="22" fill="#E91E63" opacity="0.9"/>
+    <ellipse cx="80"  cy="0"   rx="46" ry="22" fill="#E91E63" opacity="0.9"/>
+    <ellipse cx="-57" cy="-57" rx="26" ry="42" fill="#F48FB1" opacity="0.82" transform="rotate(-45 -57 -57)"/>
+    <ellipse cx="57"  cy="-57" rx="26" ry="42" fill="#F48FB1" opacity="0.82" transform="rotate(45 57 -57)"/>
+    <ellipse cx="-57" cy="57"  rx="26" ry="42" fill="#F48FB1" opacity="0.82" transform="rotate(45 -57 57)"/>
+    <ellipse cx="57"  cy="57"  rx="26" ry="42" fill="#F48FB1" opacity="0.82" transform="rotate(-45 57 57)"/>
+    <circle cx="0" cy="0" r="30" fill="#FFD700"/>
+    <circle cx="0" cy="0" r="14" fill="#FFF176" opacity="0.9"/>
+  </g>
+
+  <!-- Right large -->
+  <g transform="translate(940,390) scale(0.78)" filter="url(#fglow)">
+    <ellipse cx="0"   cy="-80" rx="22" ry="46" fill="#9C27B0" opacity="0.9"/>
+    <ellipse cx="0"   cy="80"  rx="22" ry="46" fill="#9C27B0" opacity="0.9"/>
+    <ellipse cx="-80" cy="0"   rx="46" ry="22" fill="#9C27B0" opacity="0.9"/>
+    <ellipse cx="80"  cy="0"   rx="46" ry="22" fill="#9C27B0" opacity="0.9"/>
+    <ellipse cx="-57" cy="-57" rx="26" ry="42" fill="#CE93D8" opacity="0.82" transform="rotate(-45 -57 -57)"/>
+    <ellipse cx="57"  cy="-57" rx="26" ry="42" fill="#CE93D8" opacity="0.82" transform="rotate(45 57 -57)"/>
+    <ellipse cx="-57" cy="57"  rx="26" ry="42" fill="#CE93D8" opacity="0.82" transform="rotate(45 -57 57)"/>
+    <ellipse cx="57"  cy="57"  rx="26" ry="42" fill="#CE93D8" opacity="0.82" transform="rotate(-45 57 57)"/>
+    <circle cx="0" cy="0" r="30" fill="#FFD700"/>
+    <circle cx="0" cy="0" r="14" fill="#FFF176" opacity="0.9"/>
+  </g>
+
+  <!-- Small accent flowers -->
+  <g transform="translate(430,490) scale(0.48)" filter="url(#fglow)">
+    <ellipse cx="0" cy="-70" rx="18" ry="40" fill="#FF6347" opacity="0.88"/>
+    <ellipse cx="0" cy="70"  rx="18" ry="40" fill="#FF6347" opacity="0.88"/>
+    <ellipse cx="-70" cy="0" rx="40" ry="18" fill="#FF6347" opacity="0.88"/>
+    <ellipse cx="70"  cy="0" rx="40" ry="18" fill="#FF6347" opacity="0.88"/>
+    <ellipse cx="-50" cy="-50" rx="22" ry="36" fill="#FFA07A" opacity="0.8" transform="rotate(-45 -50 -50)"/>
+    <ellipse cx="50"  cy="-50" rx="22" ry="36" fill="#FFA07A" opacity="0.8" transform="rotate(45 50 -50)"/>
+    <ellipse cx="-50" cy="50"  rx="22" ry="36" fill="#FFA07A" opacity="0.8" transform="rotate(45 -50 50)"/>
+    <ellipse cx="50"  cy="50"  rx="22" ry="36" fill="#FFA07A" opacity="0.8" transform="rotate(-45 50 50)"/>
+    <circle cx="0" cy="0" r="24" fill="#FFD700"/>
+  </g>
+  <g transform="translate(770,490) scale(0.48)" filter="url(#fglow)">
+    <ellipse cx="0" cy="-70" rx="18" ry="40" fill="#FDD835" opacity="0.88"/>
+    <ellipse cx="0" cy="70"  rx="18" ry="40" fill="#FDD835" opacity="0.88"/>
+    <ellipse cx="-70" cy="0" rx="40" ry="18" fill="#FDD835" opacity="0.88"/>
+    <ellipse cx="70"  cy="0" rx="40" ry="18" fill="#FDD835" opacity="0.88"/>
+    <ellipse cx="-50" cy="-50" rx="22" ry="36" fill="#FFF176" opacity="0.8" transform="rotate(-45 -50 -50)"/>
+    <ellipse cx="50"  cy="-50" rx="22" ry="36" fill="#FFF176" opacity="0.8" transform="rotate(45 50 -50)"/>
+    <ellipse cx="-50" cy="50"  rx="22" ry="36" fill="#FFF176" opacity="0.8" transform="rotate(45 -50 50)"/>
+    <ellipse cx="50"  cy="50"  rx="22" ry="36" fill="#FFF176" opacity="0.8" transform="rotate(-45 50 50)"/>
+    <circle cx="0" cy="0" r="24" fill="#FF8C00"/>
+  </g>
+
+  <!-- Stems & leaves at bottom -->
+  <line x1="600" y1="440" x2="600" y2="590" stroke="#3a8a18" stroke-width="5" stroke-linecap="round"/>
+  <line x1="260" y1="470" x2="260" y2="590" stroke="#3a8a18" stroke-width="4" stroke-linecap="round"/>
+  <line x1="940" y1="470" x2="940" y2="590" stroke="#3a8a18" stroke-width="4" stroke-linecap="round"/>
+  <ellipse cx="570" cy="520" rx="28" ry="12" fill="#4aaa20" transform="rotate(-35 570 520)" opacity="0.9"/>
+  <ellipse cx="630" cy="540" rx="28" ry="12" fill="#4aaa20" transform="rotate(35 630 540)"  opacity="0.9"/>
+  <ellipse cx="232" cy="520" rx="22" ry="9"  fill="#4aaa20" transform="rotate(-30 232 520)" opacity="0.9"/>
+  <ellipse cx="968" cy="520" rx="22" ry="9"  fill="#4aaa20" transform="rotate(30 968 520)"  opacity="0.9"/>
+
+  <!-- Sparkles -->
+  <g fill="#FFD700" opacity="0.9">
+    <polygon points="130,200  133,210  143,210  135,216  138,226  130,220  122,226  125,216  117,210  127,210" transform="scale(0.6) translate(80,160)"/>
+    <polygon points="1070,200 1073,210 1083,210 1075,216 1078,226 1070,220 1062,226 1065,216 1057,210 1067,210" transform="scale(0.55) translate(890,160)"/>
+    <circle cx="180" cy="220" r="4" fill="white" opacity="0.8"/>
+    <circle cx="1020" cy="200" r="3" fill="white" opacity="0.8"/>
+    <circle cx="400"  cy="180" r="3" fill="rgba(255,200,255,0.9)"/>
+    <circle cx="800"  cy="170" r="3" fill="rgba(255,200,255,0.9)"/>
+  </g>
+
+  <!-- ── MAIN TEXT ── -->
+  <!-- Shadow/glow layer -->
+  <text x="600" y="175" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="76" font-style="italic" font-weight="bold"
+        fill="rgba(255,150,200,0.35)" filter="url(#textglow)">Happy Women's Day</text>
+  <!-- Main text -->
+  <text x="600" y="175" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="76" font-style="italic" font-weight="bold"
+        fill="white"
+        style="text-shadow: 0 0 30px rgba(255,180,220,1)">Happy Women's Day</text>
+
+  <!-- Date -->
+  <text x="600" y="230" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="38" font-style="italic"
+        fill="rgba(255,230,150,0.95)">8 / 3 🌸</text>
+
+  <!-- Bottom tagline -->
+  <text x="600" y="598" text-anchor="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="24" font-style="italic"
+        fill="rgba(255,220,180,0.75)">Chúc mừng ngày Quốc tế Phụ nữ</text>
+</svg>
