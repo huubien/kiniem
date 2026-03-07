@@ -73,6 +73,13 @@ export default function SunsetScene() {
         <filter id="blur6"><feGaussianBlur stdDeviation="6" /></filter>
         <filter id="blur12"><feGaussianBlur stdDeviation="12" /></filter>
         <filter id="blur3"><feGaussianBlur stdDeviation="3" /></filter>
+        <filter id="flowerGlow" x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
       </defs>
 
       {/* ── SKY ── */}
@@ -179,15 +186,17 @@ export default function SunsetScene() {
 
       {/* ── FLOWERS ── */}
       {flowers.map(({x,y,c,sz},i) => (
-        <g key={i} transform={`translate(${x},${y}) scale(${sz})`}>
-          <line x1="0" y1="0" x2="0" y2="-24" stroke="#4a8c18" strokeWidth="2.5" strokeLinecap="round" />
+        <g key={i} transform={`translate(${x},${y}) scale(${sz})`} filter="url(#flowerGlow)">
+          <line x1="0" y1="0" x2="0" y2="-28" stroke="#4a8c18" strokeWidth="2.5" strokeLinecap="round" />
+          {/* petals */}
           {[0,60,120,180,240,300].map((a,j) => {
             const rd = a*Math.PI/180;
-            return <ellipse key={j} cx={Math.cos(rd)*10} cy={-24+Math.sin(rd)*10}
-              rx="7" ry="4.5" fill={c} opacity="0.9"
-              transform={`rotate(${a} ${Math.cos(rd)*10} ${-24+Math.sin(rd)*10})`} />;
+            return <ellipse key={j} cx={Math.cos(rd)*12} cy={-28+Math.sin(rd)*12}
+              rx="8" ry="5" fill={c} opacity="0.92"
+              transform={`rotate(${a} ${Math.cos(rd)*12} ${-28+Math.sin(rd)*12})`} />;
           })}
-          <circle cx="0" cy="-24" r="5" fill="#FFD700" />
+          <circle cx="0" cy="-28" r="6" fill="#FFD700" />
+          <circle cx="0" cy="-28" r="3" fill="#FFF176" opacity="0.9"/>
         </g>
       ))}
 

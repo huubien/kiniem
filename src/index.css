@@ -105,7 +105,7 @@ canvas.layer {
 
 /* ── Responsive character positions ── */
 .char-pos-girl { bottom: 19%; right: 10%; }
-.char-pos-boy  { bottom: 19%; right: 28%; }
+.char-pos-boy  { bottom: 19%; right: calc(10% + 143px); }
 
 /* Scale characters inside GSAP wrapper without affecting GSAP transforms */
 .char-wrap { transform-origin: bottom center; }
@@ -115,7 +115,7 @@ canvas.layer {
   .letterbox-top, .letterbox-bottom { height: 4vh; }
   .char-wrap  { transform: scale(0.52); }
   .char-pos-girl { bottom: 17%; right: 2%; }
-  .char-pos-boy  { bottom: 17%; right: 22%; }
+  .char-pos-boy  { bottom: 17%; right: calc(2% + 74px); }
   .cin-text { font-size: clamp(0.85rem, 4.2vw, 1.2rem) !important; }
 }
 
@@ -123,10 +123,11 @@ canvas.layer {
 @media (min-width: 481px) and (max-width: 768px) {
   .char-wrap { transform: scale(0.7); }
   .char-pos-girl { bottom: 18%; right: 5%; }
-  .char-pos-boy  { bottom: 18%; right: 26%; }
+  .char-pos-boy  { bottom: 18%; right: calc(5% + 100px); }
 }
 
 /* ── Small laptop (769px – 1024px) ── */
 @media (min-width: 769px) and (max-width: 1024px) {
   .char-wrap { transform: scale(0.85); }
+  .char-pos-boy  { right: calc(10% + 122px); }
 }

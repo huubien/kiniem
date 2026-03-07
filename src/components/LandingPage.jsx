@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
+import { useLanguage } from '../i18n/LanguageContext';
 
 const STARS = Array.from({ length: 65 }, (_, i) => ({
   x:  ((i * 137.5 * 13.7) % 98) + 1,
@@ -9,6 +10,7 @@ const STARS = Array.from({ length: 65 }, (_, i) => ({
 }));
 
 export default function LandingPage({ onStart, music }) {
+  const { lang, t, toggle: toggleLang } = useLanguage();
   const [boy,   setBoy]   = useState('');
   const [girl,  setGirl]  = useState('');
   const [muted, setMuted] = useState(false);
@@ -105,18 +107,18 @@ export default function LandingPage({ onStart, music }) {
             <div className="text-5xl mb-3" style={{ animation: 'pulseSoft 3s ease-in-out infinite',
               filter: 'drop-shadow(0 0 16px rgba(255,120,200,0.8))' }}>🌸</div>
             <h1 className="cin-text text-3xl md:text-4xl font-bold !not-italic">
-              Happy Women's Day 🌸
+              {t.title}
             </h1>
             <p className="text-rose-200/60 text-sm mt-2 tracking-widest">
-              ✦ 8/3 • A day to celebrate her ✦
+              {t.subtitle}
             </p>
           </div>
 
           {/* Form */}
           <form ref={formRef} onSubmit={submit} className="space-y-5">
             {[
-              { label: '💙 Your Name', val: boy, set: setBoy, ph: 'Enter your name…' },
-              { label: '💗 Her Name',  val: girl, set: setGirl, ph: 'Enter her name…' },
+              { label: t.labelBoy,  val: boy,  set: setBoy,  ph: t.placeholderBoy  },
+              { label: t.labelGirl, val: girl, set: setGirl, ph: t.placeholderGirl },
             ].map(({ label, val, set, ph }) => (
               <div key={label}>
                 <label className="block text-rose-200/80 text-xs font-bold mb-2 uppercase tracking-widest">{label}</label>
@@ -136,7 +138,7 @@ export default function LandingPage({ onStart, music }) {
                          hover:brightness-110 hover:shadow-rose-500/30 active:scale-95"
               style={{ background: valid ? 'linear-gradient(135deg,#e91e63,#ff5722,#e91e63)' : 'rgba(255,255,255,0.12)',
                        backgroundSize: '200% auto', animation: valid ? 'shimmer 3s linear infinite' : 'none' }}>
-              {going ? '🎬 Creating your story…' : '🌸 Create 8/3 Surprise'}
+              {going ? t.btnCreating : t.btnCreate}
             </button>
           </form>
 
@@ -144,10 +146,20 @@ export default function LandingPage({ onStart, music }) {
           <p className="text-center mt-6 text-xs"
             style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic',
                      color: 'rgba(255,182,193,0.55)' }}>
-            ✦ By Hữu Biên ✦
+            {t.credit}
           </p>
         </div>
       </div>
+
+      {/* Language toggle */}
+      <button onClick={toggleLang}
+        className="absolute bottom-5 right-5 z-50 text-white/60 text-sm px-4 py-2
+                   rounded-full border border-white/15 hover:text-white/90
+                   transition-all duration-200 backdrop-blur-sm font-bold tracking-widest"
+        style={{ background: 'rgba(0,0,0,0.28)' }}>
+        {lang === 'vi' ? '🇬🇧 EN' : '🇻🇳 VI'}
+      </button>
+
       {/* Music toggle on landing */}
       <button onClick={handleMute}
         className="absolute bottom-5 left-5 z-50 text-white/50 text-sm px-4 py-2
@@ -155,7 +167,7 @@ export default function LandingPage({ onStart, music }) {
                    transition-all duration-200 backdrop-blur-sm flex items-center gap-2"
         style={{ background: 'rgba(0,0,0,0.28)' }}>
         <span>{muted ? '🔇' : '🎵'}</span>
-        <span className="text-xs">{muted ? 'Nhạc tắt' : 'Nhạc nền'}</span>
+        <span className="text-xs">{muted ? t.musicOff : t.musicOn}</span>
       </button>
 
     </div>

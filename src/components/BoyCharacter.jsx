@@ -6,6 +6,7 @@ import React from 'react';
  */
 export default function BoyCharacter({ pose = 'standing' }) {
   const kneeling = pose === 'kneeling';
+  const together = pose === 'together';
 
   /* shared face */
   const Face = ({ dy = 0 }) => (
@@ -13,11 +14,12 @@ export default function BoyCharacter({ pose = 'standing' }) {
       <circle cx="75" cy={dy + 55} r="44" fill="#FDBCB4" />
       <ellipse cx="31"  cy={dy + 57} rx="9"  ry="12" fill="#F0A090" />
       <ellipse cx="119" cy={dy + 57} rx="9"  ry="12" fill="#F0A090" />
-      {/* hair */}
-      <path d={`M32 ${dy+40} C35 ${dy+8},115 ${dy+8},118 ${dy+40} C108 ${dy+25},75 ${dy+20},32 ${dy+40}Z`} fill="#2e1a0e" />
-      <rect x="31" y={dy+16} width="88" height="28" rx="10" fill="#2e1a0e" />
-      <ellipse cx="30"  cy={dy+44} rx="10" ry="18" fill="#2e1a0e" />
-      <ellipse cx="120" cy={dy+44} rx="10" ry="18" fill="#2e1a0e" />
+      {/* hair – dome closes at dy+42 (above eyes at dy+54), peak at dy+0 */}
+      <path d={`M30 ${dy+42} C30 ${dy-14} 120 ${dy-14} 120 ${dy+42} Z`} fill="#2e1a0e" />
+      <ellipse cx="27"  cy={dy+46} rx="11" ry="16" fill="#2e1a0e" />
+      <ellipse cx="123" cy={dy+46} rx="11" ry="16" fill="#2e1a0e" />
+      {/* cute small tuft at front */}
+      <path d={`M70 ${dy+14} C68 ${dy+21},73 ${dy+27},74 ${dy+31}`} stroke="#3a220e" strokeWidth="4" fill="none" strokeLinecap="round"/>
       {/* eyes */}
       <ellipse cx="58" cy={dy+54} rx="10" ry="11" fill="white" />
       <ellipse cx="92" cy={dy+54} rx="10" ry="11" fill="white" />
@@ -40,20 +42,45 @@ export default function BoyCharacter({ pose = 'standing' }) {
     </>
   );
 
-  /* flower bouquet */
+  /* flower bouquet – beautiful glowing version */
   const Bouquet = ({ x, y }) => (
-    <g transform={`translate(${x},${y})`}>
-      {[-6,0,6].map((ox,i)=>(
-        <line key={i} x1={ox} y1="0" x2={ox+2} y2="-28" stroke="#3a7a18" strokeWidth="2.5" strokeLinecap="round"/>
+    <g transform={`translate(${x},${y})`}
+       style={{filter:'drop-shadow(0 0 6px rgba(255,120,200,0.95)) drop-shadow(0 0 14px rgba(255,60,150,0.55))'}}>
+      {/* stems */}
+      {[[-8,0,-10,-38],[0,0,2,-44],[8,0,10,-36],[-4,-4,-14,-30],[5,-3,16,-28]].map(([x1,y1,x2,y2],i)=>(
+        <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#3a8a18" strokeWidth="2.5" strokeLinecap="round"/>
       ))}
-      {[['#E53935',0,-30],['#EC407A',8,-22],['#FDD835',-8,-22],['#AB47BC',4,-14],['#FF7043',-4,-14]].map(([c,x,y],i)=>(
-        <circle key={i} cx={x} cy={y} r="9" fill={c}/>
+      {/* leaves */}
+      <ellipse cx="-11" cy="-22" rx="7" ry="3.5" fill="#4aaa20" transform="rotate(-35 -11 -22)" opacity="0.92"/>
+      <ellipse cx="13"  cy="-20" rx="7" ry="3.5" fill="#4aaa20" transform="rotate(35 13 -20)"  opacity="0.92"/>
+      {/* petal flowers */}
+      {[
+        ['#FF1493',0,-46,11,'#FF69B4'],
+        ['#E91E63',11,-34,10,'#F48FB1'],
+        ['#FF5722',-11,-32,10,'#FF8A65'],
+        ['#9C27B0',5,-24,9,'#CE93D8'],
+        ['#FDD835',-6,-22,9,'#FFF176'],
+      ].map(([c,fx,fy,r,lc],i)=>(
+        <g key={i}>
+          {[0,60,120,180,240,300].map((a,j)=>{
+            const rd=a*Math.PI/180;
+            return <ellipse key={j}
+              cx={fx+Math.cos(rd)*r*0.88} cy={fy+Math.sin(rd)*r*0.88}
+              rx={r*0.62} ry={r*0.36} fill={lc} opacity="0.88"
+              transform={`rotate(${a} ${fx+Math.cos(rd)*r*0.88} ${fy+Math.sin(rd)*r*0.88})`}/>;
+          })}
+          <circle cx={fx} cy={fy} r={r*0.48} fill={c}/>
+          <circle cx={fx} cy={fy} r={r*0.22} fill="#FFD700" opacity="0.95"/>
+        </g>
       ))}
-      {[['#EF5350',0,-30],['#F06292',8,-22],['#FFF176',-8,-22]].map(([c,x,y],i)=>(
-        <circle key={i} cx={x} cy={y} r="5" fill={c} opacity="0.7"/>
+      {/* baby's breath */}
+      {[[-15,-40],[17,-38],[-5,-52],[15,-22],[0,-14]].map(([bx,by],i)=>(
+        <circle key={i} cx={bx} cy={by} r="2.8" fill="white" opacity="0.88"/>
       ))}
       {/* ribbon */}
-      <path d="M-8 0 Q0 4 8 0 Q4 8 0 10 Q-4 8 -8 0Z" fill="#FF69B4"/>
+      <path d="M-10 2 Q0 7 10 2 Q6 14 0 16 Q-6 14 -10 2Z" fill="#FF69B4"/>
+      <path d="M-10 2 Q-7 -5 -2 2Z" fill="#E91E63" opacity="0.75"/>
+      <path d="M10 2 Q7 -5 2 2Z"    fill="#E91E63" opacity="0.75"/>
     </g>
   );
 
@@ -87,13 +114,21 @@ export default function BoyCharacter({ pose = 'standing' }) {
           <rect x="16" y="112" width="28" height="15" rx="7" fill="#FDBCB4"/>
           <circle cx="16" cy="119" r="8" fill="#FDBCB4"/>
         </g>
-        {/* right arm – holding bouquet */}
-        <g id="boy-arm-right">
-          <rect x="106" y="108" width="28" height="15" rx="7" fill="#FDBCB4"
-                transform="rotate(-20 120 120)"/>
-          <circle cx="128" cy="104" r="8" fill="#FDBCB4"/>
-          <Bouquet x={130} y={90} />
-        </g>
+        {/* right arm – holding bouquet (standing) or holding hand (together) */}
+        {together ? (
+          <g id="boy-arm-right">
+            <rect x="108" y="119" width="44" height="14" rx="7" fill="#FDBCB4"
+                  transform="rotate(16 108 126)"/>
+            <circle cx="147" cy="136" r="8" fill="#FDBCB4"/>
+          </g>
+        ) : (
+          <g id="boy-arm-right">
+            <rect x="106" y="108" width="28" height="15" rx="7" fill="#FDBCB4"
+                  transform="rotate(-20 120 120)"/>
+            <circle cx="128" cy="104" r="8" fill="#FDBCB4"/>
+            <Bouquet x={130} y={90} />
+          </g>
+        )}
         {/* neck */}
         <rect x="63" y="90" width="24" height="18" rx="10" fill="#FDBCB4"/>
         <Face dy={0} />

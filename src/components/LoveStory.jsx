@@ -7,6 +7,7 @@ import PetalParticles      from './PetalParticles';
 import HeartParticles      from './HeartParticles';
 import Fireworks           from './Fireworks';
 import { useRomanticMusic } from '../hooks/useRomanticMusic';
+import { useLanguage }     from '../i18n/LanguageContext';
 
 /* ── small helper: cinematic text paragraph ── */
 const CinText = React.forwardRef(({ children, className = '' }, ref) => (
@@ -18,6 +19,7 @@ const CinText = React.forwardRef(({ children, className = '' }, ref) => (
 ));
 
 export default function LoveStory({ boyName, girlName, onReset, music }) {
+  const { lang, t, toggle: toggleLang } = useLanguage();
   /* ── character pose state ── */
   const [boyPose,   setBoyPose]   = useState('standing');
   const [girlPose,  setGirlPose]  = useState('standing');
@@ -172,10 +174,12 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
        SCENE 6 – Together, fireworks (47 – 57 s)
     ════════════════════════════════════════════ */
     tl.addLabel('s6', 47)
-      /* boy stands again */
-      .call(() => { setBoyPose('standing'); }, null, 's6')
+      /* boy stands with hand extended toward girl */
+      .call(() => { setBoyPose('together'); }, null, 's6')
       .to(boyRef.current,  { y: 0, duration: 0.8 }, 's6')
       .to(girlRef.current, { y: 0, duration: 0.8 }, 's6')
+      /* girl transitions to together (holding bouquet + holding hand) */
+      .call(() => { setGirlPose('together'); }, null, 's6+=0.4')
       /* switch to hearts off, fireworks on */
       .call(() => { setHearts(false); setFireworks(true); }, null, 's6+=0.5')
       /* camera slowly rotates around them: slight parallax oscillation */
@@ -277,14 +281,14 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
       <div ref={text1Ref}
         className="absolute inset-x-0 flex justify-center pointer-events-none z-20"
         style={{ top: '30%' }}>
-        <CinText>"March 8th ✿"</CinText>
+        <CinText>{t.scene1}</CinText>
       </div>
 
       {/* Scene 1b – A day for someone special */}
       <div ref={text1bRef}
         className="absolute inset-x-0 flex justify-center pointer-events-none z-20"
         style={{ top: '30%' }}>
-        <CinText>"A day for someone special"</CinText>
+        <CinText>{t.scene1b}</CinText>
       </div>
 
       {/* Scene 2 – girl name */}
@@ -302,14 +306,14 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
       <div ref={text2bRef}
         className="absolute inset-x-0 flex justify-center pointer-events-none z-20"
         style={{ top: '42%' }}>
-        <CinText>"Because today is all about you."</CinText>
+        <CinText>{t.scene2b}</CinText>
       </div>
 
       {/* Scene 3 */}
       <div ref={text2Ref}
         className="absolute inset-x-0 flex justify-center pointer-events-none z-20"
         style={{ top: '28%' }}>
-        <CinText>"Someone prepared a small surprise."</CinText>
+        <CinText>{t.scene3}</CinText>
       </div>
 
       {/* Scene 4 mid-walk */}
@@ -317,7 +321,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
         className="absolute inset-x-0 flex justify-center pointer-events-none z-20"
         style={{ bottom: '30%' }}>
         <CinText className="text-lg md:text-2xl opacity-90">
-          "Every step of the way, thinking of you."
+          {t.scene4}
         </CinText>
       </div>
 
@@ -326,7 +330,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
         className="absolute inset-x-0 flex flex-col items-center pointer-events-none z-20"
         style={{ top: '20%' }}>
         <p className="cin-text text-xl sm:text-3xl md:text-5xl">
-          "Happy Women's Day,
+          {t.scene5a}
         </p>
         <p className="cin-name text-2xl sm:text-4xl md:text-6xl font-bold text-rose-300 mt-1"
           style={{ fontFamily: "'Playfair Display',serif" }}>
@@ -352,7 +356,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
             color: '#ffb8d4',
             textShadow: '0 0 22px rgba(255,130,190,0.85)',
           }}>
-          Happy 8/3 🌸
+          {t.happy83}
         </p>
         <p ref={finalNameRef}
           className="text-white font-bold"
@@ -370,14 +374,14 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
             fontSize: 'clamp(0.85rem,2vw,1.9rem)',
             textShadow: '0 0 20px rgba(255,150,180,0.7)',
           }}>
-          You deserve all the flowers in the world
+          {t.finalSub}
         </p>
         <div className="h-px w-48 mt-8 bg-gradient-to-r from-transparent via-rose-300/60 to-transparent" />
         <p ref={creditRef}
           className="mt-5 text-sm"
           style={{ fontFamily:"'Playfair Display',serif", fontStyle:'italic',
                    color:'rgba(255,182,193,0.5)' }}>
-          ✦ By Hữu Biên ✦
+          {t.credit}
         </p>
         <button ref={replayRef}
           onClick={handleReset}
@@ -385,7 +389,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
                      border border-white/25 hover:bg-white/15 hover:scale-105 active:scale-95
                      transition-all duration-200 tracking-wide backdrop-blur-sm"
           style={{ background:'rgba(255,255,255,0.10)', fontSize:'1rem' }}>
-          🔄 Create Another 8/3 Story
+          {t.btnReplay}
         </button>
       </div>
 
@@ -396,19 +400,29 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
                    rounded-full border border-white/15 hover:text-white/80 hover:border-white/35
                    transition-all duration-200 backdrop-blur-sm"
         style={{ background:'rgba(0,0,0,0.25)' }}>
-        Skip ⏭
+        {t.btnSkip}
+      </button>
+
+      {/* ── Language toggle ── */}
+      <button
+        onClick={toggleLang}
+        className="absolute bottom-12 right-24 z-50 text-white/55 text-sm px-4 py-2
+                   rounded-full border border-white/15 hover:text-white/85 hover:border-white/35
+                   transition-all duration-200 backdrop-blur-sm font-bold tracking-widest"
+        style={{ background: 'rgba(0,0,0,0.28)' }}>
+        {lang === 'vi' ? '🇬🇧 EN' : '🇻🇳 VI'}
       </button>
 
       {/* ── Music toggle button ── */}
       <button
         onClick={handleMute}
-        title={muted ? 'Bật nhạc' : 'Tắt nhạc'}
+        title={muted ? t.titleMusicOff : t.titleMusicOn}
         className="absolute bottom-12 left-6 z-50 text-white/55 text-base px-4 py-2
                    rounded-full border border-white/15 hover:text-white/85 hover:border-white/35
                    transition-all duration-200 backdrop-blur-sm flex items-center gap-2"
         style={{ background: 'rgba(0,0,0,0.28)' }}>
         <span style={{ fontSize: '1.1rem' }}>{muted ? '🔇' : '🎵'}</span>
-        <span className="text-xs tracking-wide">{muted ? 'Nhạc tắt' : 'Nhạc nền'}</span>
+        <span className="text-xs tracking-wide">{muted ? t.musicOff : t.musicOn}</span>
       </button>
     </div>
   );
