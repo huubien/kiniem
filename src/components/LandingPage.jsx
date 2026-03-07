@@ -45,7 +45,7 @@ export default function LandingPage({ onStart, music }) {
 
   const submit = (e) => {
     e.preventDefault();
-    if (!boy.trim() || !girl.trim() || going) return;
+    if (!girl.trim() || going) return;
     triggerMusic(); // ensure music starts on button press (iOS fallback)
     setGoing(true);
     gsap.timeline()
@@ -55,7 +55,7 @@ export default function LandingPage({ onStart, music }) {
           onComplete: () => onStart(boy.trim(), girl.trim()) });
   };
 
-  const valid = boy.trim() && girl.trim();
+  const valid = girl.trim();
 
   return (
     <div ref={wrapRef}
