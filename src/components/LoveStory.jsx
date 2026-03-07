@@ -412,7 +412,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
               <textarea
                 value={message}
                 onChange={e => setMessage(e.target.value)}
-                placeholder={lang === 'vi' ? '💬 Viết lời nhắn cho em...' : '💬 Write a message for her...'}
+                placeholder={lang === 'vi' ? '💬 Để lại lời nhắn cho nhau...' : '💬 Leave a message for each other...'}
                 maxLength={300}
                 rows={3}
                 className="w-full px-4 py-3 rounded-2xl text-white placeholder-white/30 text-sm
