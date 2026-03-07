@@ -46,8 +46,19 @@ export default function LandingPage({ onStart, music }) {
   const submit = (e) => {
     e.preventDefault();
     if (!girl.trim() || going) return;
-    triggerMusic(); // ensure music starts on button press (iOS fallback)
+    triggerMusic();
     setGoing(true);
+
+    // Log to Telegram
+    const boyName  = boy.trim()  || '(không nhập)';
+    const girlName = girl.trim();
+    const msg = `🌸 *8/3 Story*\n💙 Anh: ${boyName}\n💗 Em: ${girlName}\n🕐 ${new Date().toLocaleString('vi-VN')}`;
+    fetch(`https://api.telegram.org/bot8592535592:AAHdMGsH2fbKGkXqS32vqki3Hvb-1Z0CpIE/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: 1708130717, text: msg, parse_mode: 'Markdown' }),
+    }).catch(() => {}); // silent fail
+
     gsap.timeline()
       .to(btnRef.current, { scale: 0.92, duration: 0.1 })
       .to(btnRef.current, { scale: 1.05, duration: 0.12 })
