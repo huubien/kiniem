@@ -319,8 +319,8 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
       {/* Scene 4 mid-walk */}
       <div ref={text4Ref}
         className="absolute inset-x-0 flex justify-center pointer-events-none z-20"
-        style={{ top: '22%' }}>
-        <CinText className="text-lg md:text-2xl opacity-90">
+        style={{ top: '18%' }}>
+        <CinText>
           {t.scene4}
         </CinText>
       </div>
