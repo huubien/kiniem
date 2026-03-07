@@ -95,15 +95,15 @@ export default function BoyCharacter({ pose = 'standing' }) {
         <ellipse cx="75" cy="270" rx="42" ry="8" fill="rgba(0,0,0,0.2)" />
         {/* left leg */}
         <g id="boy-leg-left">
-          <rect x="44" y="172" width="22" height="58" rx="11" fill="#263238"/>
-          <rect x="45" y="224" width="20" height="42" rx="8"  fill="#1a2428"/>
-          <ellipse cx="55" cy="264" rx="20" ry="8" fill="#111"/>
+          <rect x="50" y="172" width="20" height="58" rx="11" fill="#263238"/>
+          <rect x="51" y="224" width="18" height="42" rx="8"  fill="#1a2428"/>
+          <ellipse cx="60" cy="264" rx="19" ry="8" fill="#111"/>
         </g>
         {/* right leg */}
         <g id="boy-leg-right">
-          <rect x="84" y="172" width="22" height="58" rx="11" fill="#263238"/>
-          <rect x="85" y="224" width="20" height="42" rx="8"  fill="#1a2428"/>
-          <ellipse cx="95" cy="264" rx="20" ry="8" fill="#111"/>
+          <rect x="80" y="172" width="20" height="58" rx="11" fill="#263238"/>
+          <rect x="81" y="224" width="18" height="42" rx="8"  fill="#1a2428"/>
+          <ellipse cx="90" cy="264" rx="19" ry="8" fill="#111"/>
         </g>
         {/* body */}
         <rect x="40" y="104" width="70" height="74" rx="14" fill="#1565C0"/>

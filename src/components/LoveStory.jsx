@@ -271,7 +271,7 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
 
       {/* Boy – target position, starts far left via GSAP x */}
       <div ref={boyRef} className="absolute char-pos-boy">
-        <div className="char-wrap">
+        <div className="char-wrap char-wrap-boy">
           <BoyCharacter pose={boyPose} />
         </div>
       </div>
@@ -393,37 +393,37 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
         </button>
       </div>
 
-      {/* ── Skip button ── */}
-      <button ref={skipRef}
-        onClick={handleSkip}
-        className="absolute bottom-12 right-6 z-50 text-white/50 text-sm px-4 py-2
-                   rounded-full border border-white/15 hover:text-white/80 hover:border-white/35
-                   transition-all duration-200 backdrop-blur-sm"
-        style={{ background:'rgba(0,0,0,0.25)' }}>
-        {t.btnSkip}
-      </button>
+      {/* ── Bottom bar: Music + Language + Skip ── */}
+      <div className="absolute bottom-6 inset-x-0 flex justify-between items-center px-4 z-50">
+        <button
+          onClick={handleMute}
+          title={muted ? t.titleMusicOff : t.titleMusicOn}
+          className="text-white/55 text-sm px-3 py-2
+                     rounded-full border border-white/15 hover:text-white/85 hover:border-white/35
+                     transition-all duration-200 backdrop-blur-sm flex items-center gap-1.5"
+          style={{ background: 'rgba(0,0,0,0.28)' }}>
+          <span>{muted ? '🔇' : '🎵'}</span>
+          <span className="text-xs tracking-wide">{muted ? t.musicOff : t.musicOn}</span>
+        </button>
 
-      {/* ── Language toggle ── */}
-      <button
-        onClick={toggleLang}
-        className="absolute bottom-12 right-24 z-50 text-white/55 text-sm px-4 py-2
-                   rounded-full border border-white/15 hover:text-white/85 hover:border-white/35
-                   transition-all duration-200 backdrop-blur-sm font-bold tracking-widest"
-        style={{ background: 'rgba(0,0,0,0.28)' }}>
-        {lang === 'vi' ? '🇬🇧 EN' : '🇻🇳 VI'}
-      </button>
+        <button
+          onClick={toggleLang}
+          className="text-white/55 text-sm px-3 py-2
+                     rounded-full border border-white/15 hover:text-white/85
+                     transition-all duration-200 backdrop-blur-sm font-bold tracking-widest"
+          style={{ background: 'rgba(0,0,0,0.28)' }}>
+          {lang === 'vi' ? '🇬🇧 EN' : '🇻🇳 VI'}
+        </button>
 
-      {/* ── Music toggle button ── */}
-      <button
-        onClick={handleMute}
-        title={muted ? t.titleMusicOff : t.titleMusicOn}
-        className="absolute bottom-12 left-6 z-50 text-white/55 text-base px-4 py-2
-                   rounded-full border border-white/15 hover:text-white/85 hover:border-white/35
-                   transition-all duration-200 backdrop-blur-sm flex items-center gap-2"
-        style={{ background: 'rgba(0,0,0,0.28)' }}>
-        <span style={{ fontSize: '1.1rem' }}>{muted ? '🔇' : '🎵'}</span>
-        <span className="text-xs tracking-wide">{muted ? t.musicOff : t.musicOn}</span>
-      </button>
+        <button ref={skipRef}
+          onClick={handleSkip}
+          className="text-white/50 text-sm px-3 py-2
+                     rounded-full border border-white/15 hover:text-white/80 hover:border-white/35
+                     transition-all duration-200 backdrop-blur-sm"
+          style={{ background:'rgba(0,0,0,0.25)' }}>
+          {t.btnSkip}
+        </button>
+      </div>
     </div>
   );
 }

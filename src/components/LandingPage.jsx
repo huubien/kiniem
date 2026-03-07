@@ -151,24 +151,25 @@ export default function LandingPage({ onStart, music }) {
         </div>
       </div>
 
-      {/* Language toggle */}
-      <button onClick={toggleLang}
-        className="absolute bottom-5 right-5 z-50 text-white/60 text-sm px-4 py-2
-                   rounded-full border border-white/15 hover:text-white/90
-                   transition-all duration-200 backdrop-blur-sm font-bold tracking-widest"
-        style={{ background: 'rgba(0,0,0,0.28)' }}>
-        {lang === 'vi' ? '🇬🇧 EN' : '🇻🇳 VI'}
-      </button>
+      {/* ── Bottom bar: Music + Language ── */}
+      <div className="absolute bottom-4 inset-x-0 flex justify-between items-center px-4 z-50">
+        <button onClick={handleMute}
+          className="text-white/50 text-sm px-3 py-2
+                     rounded-full border border-white/15 hover:text-white/80
+                     transition-all duration-200 backdrop-blur-sm flex items-center gap-1.5"
+          style={{ background: 'rgba(0,0,0,0.28)' }}>
+          <span>{muted ? '🔇' : '🎵'}</span>
+          <span className="text-xs">{muted ? t.musicOff : t.musicOn}</span>
+        </button>
 
-      {/* Music toggle on landing */}
-      <button onClick={handleMute}
-        className="absolute bottom-5 left-5 z-50 text-white/50 text-sm px-4 py-2
-                   rounded-full border border-white/15 hover:text-white/80
-                   transition-all duration-200 backdrop-blur-sm flex items-center gap-2"
-        style={{ background: 'rgba(0,0,0,0.28)' }}>
-        <span>{muted ? '🔇' : '🎵'}</span>
-        <span className="text-xs">{muted ? t.musicOff : t.musicOn}</span>
-      </button>
+        <button onClick={toggleLang}
+          className="text-white/60 text-sm px-3 py-2
+                     rounded-full border border-white/15 hover:text-white/90
+                     transition-all duration-200 backdrop-blur-sm font-bold tracking-widest"
+          style={{ background: 'rgba(0,0,0,0.28)' }}>
+          {lang === 'vi' ? '🇬🇧 EN' : '🇻🇳 VI'}
+        </button>
+      </div>
 
     </div>
   );

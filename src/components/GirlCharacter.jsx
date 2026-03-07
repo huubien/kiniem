@@ -153,26 +153,31 @@ export default function GirlCharacter({ pose = 'standing' }) {
                 transform="rotate(-16 52 126)"/>
           <circle cx="3" cy="140" r="7.5" fill="#FDBCB4"/>
         </g>
-        {/* right arm – holding the gifted bouquet */}
-        <g style={{filter:'drop-shadow(0 0 5px rgba(255,100,200,0.9)) drop-shadow(0 0 10px rgba(255,60,140,0.5))'}}>
-          <rect x="108" y="108" width="28" height="14" rx="7" fill="#FDBCB4"
-                transform="rotate(-22 122 115)"/>
-          <circle cx="130" cy="100" r="7.5" fill="#FDBCB4"/>
-          {/* mini bouquet */}
-          <g transform="translate(132,86)">
-            {[[-4,0,-5,-22],[0,0,1,-26],[4,0,5,-20]].map(([x1,y1,x2,y2],i)=>(
+        {/* right arm – holding the gifted bouquet, raised up */}
+        <g style={{filter:'drop-shadow(0 0 6px rgba(255,100,200,0.95)) drop-shadow(0 0 14px rgba(255,60,140,0.6))'}}>
+          <rect x="108" y="109" width="44" height="14" rx="7" fill="#FDBCB4"
+                transform="rotate(-42 108 116)"/>
+          <circle cx="140" cy="84" r="7.5" fill="#FDBCB4"/>
+          {/* mini bouquet – raised higher */}
+          <g transform="translate(142,68)">
+            {[[-4,0,-5,-24],[0,0,1,-28],[4,0,5,-22]].map(([x1,y1,x2,y2],i)=>(
               <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke="#3a8a18" strokeWidth="2" strokeLinecap="round"/>
             ))}
-            {[['#FF1493',0,-28,7,'#FF69B4'],['#E91E63',7,-20,6,'#F48FB1'],['#FDD835',-7,-20,6,'#FFF176']].map(([c,fx,fy,r,lc],i)=>(
+            {[['#FF1493',0,-30,7,'#FF69B4'],['#E91E63',8,-21,6,'#F48FB1'],['#FDD835',-8,-21,6,'#FFF176']].map(([c,fx,fy,r,lc],i)=>(
               <g key={i}>
                 {[0,60,120,180,240,300].map((a,j)=>{
                   const rd=a*Math.PI/180;
                   return <ellipse key={j} cx={fx+Math.cos(rd)*r*0.85} cy={fy+Math.sin(rd)*r*0.85}
-                    rx={r*0.6} ry={r*0.33} fill={lc} opacity="0.88"
+                    rx={r*0.6} ry={r*0.33} fill={lc} opacity="0.9"
                     transform={`rotate(${a} ${fx+Math.cos(rd)*r*0.85} ${fy+Math.sin(rd)*r*0.85})`}/>;
                 })}
-                <circle cx={fx} cy={fy} r={r*0.45} fill={c}/>
+                <circle cx={fx} cy={fy} r={r*0.46} fill={c}/>
+                <circle cx={fx} cy={fy} r={r*0.2} fill="#FFD700" opacity="0.9"/>
               </g>
+            ))}
+            {/* baby's breath */}
+            {[[-10,-34],[10,-32],[0,-40],[12,-22],[-8,-18]].map(([bx,by],i)=>(
+              <circle key={i} cx={bx} cy={by} r="2.2" fill="white" opacity="0.85"/>
             ))}
             <path d="M-6 2 Q0 5 6 2 Q4 9 0 10 Q-4 9 -6 2Z" fill="#FF69B4"/>
           </g>

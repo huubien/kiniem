@@ -73,10 +73,20 @@ export default function SunsetScene() {
         <filter id="blur6"><feGaussianBlur stdDeviation="6" /></filter>
         <filter id="blur12"><feGaussianBlur stdDeviation="12" /></filter>
         <filter id="blur3"><feGaussianBlur stdDeviation="3" /></filter>
-        <filter id="flowerGlow" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="4" result="blur"/>
+        <filter id="flowerGlow" x="-120%" y="-120%" width="340%" height="340%">
+          {/* inner tight glow */}
+          <feGaussianBlur stdDeviation="3" in="SourceGraphic" result="blur1"/>
+          {/* boost RGB to make glow colourful */}
+          <feComponentTransfer in="blur1" result="colorGlow">
+            <feFuncR type="linear" slope="2.2"/>
+            <feFuncG type="linear" slope="1.4"/>
+            <feFuncB type="linear" slope="2.5"/>
+          </feComponentTransfer>
+          {/* outer soft halo */}
+          <feGaussianBlur stdDeviation="10" in="colorGlow" result="halo"/>
           <feMerge>
-            <feMergeNode in="blur"/>
+            <feMergeNode in="halo"/>
+            <feMergeNode in="colorGlow"/>
             <feMergeNode in="SourceGraphic"/>
           </feMerge>
         </filter>
@@ -186,7 +196,8 @@ export default function SunsetScene() {
 
       {/* ── FLOWERS ── */}
       {flowers.map(({x,y,c,sz},i) => (
-        <g key={i} transform={`translate(${x},${y}) scale(${sz})`} filter="url(#flowerGlow)">
+        <g key={i} transform={`translate(${x},${y}) scale(${sz})`} filter="url(#flowerGlow)"
+           style={{animation:`flowerPulse ${2.5+(i%4)*0.6}s ease-in-out ${(i*0.18)%2}s infinite`}}>
           <line x1="0" y1="0" x2="0" y2="-28" stroke="#4a8c18" strokeWidth="2.5" strokeLinecap="round" />
           {/* petals */}
           {[0,60,120,180,240,300].map((a,j) => {
