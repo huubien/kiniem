@@ -26,6 +26,19 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
   const [hearts,    setHearts]    = useState(false);
   const [fireworks, setFireworks] = useState(false);
   const [muted,     setMuted]     = useState(false);
+  const [message,   setMessage]   = useState('');
+  const [msgSent,   setMsgSent]   = useState(false);
+
+  const sendMessage = () => {
+    if (!message.trim() || msgSent) return;
+    const text = `💌 *Lời nhắn từ ${boyName || 'Anh'} → ${girlName}*\n\n"${message.trim()}"\n\n🕐 ${new Date().toLocaleString('vi-VN')}`;
+    fetch(`https://api.telegram.org/bot8592535592:AAHdMGsH2fbKGkXqS32vqki3Hvb-1Z0CpIE/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: 1708130717, text, parse_mode: 'Markdown' }),
+    }).catch(() => {});
+    setMsgSent(true);
+  };
 
   /* ── music (passed from App) ── */
   // music prop used directly — no new hook needed
@@ -391,6 +404,41 @@ export default function LoveStory({ boyName, girlName, onReset, music }) {
           style={{ background:'rgba(255,255,255,0.10)', fontSize:'1rem' }}>
           {t.btnReplay}
         </button>
+
+        {/* ── Lời nhắn ── */}
+        <div className="mt-6 w-full pointer-events-auto" style={{ maxWidth: 380 }}>
+          {!msgSent ? (
+            <>
+              <textarea
+                value={message}
+                onChange={e => setMessage(e.target.value)}
+                placeholder={lang === 'vi' ? '💬 Viết lời nhắn cho em...' : '💬 Write a message for her...'}
+                maxLength={300}
+                rows={3}
+                className="w-full px-4 py-3 rounded-2xl text-white placeholder-white/30 text-sm
+                           outline-none border border-white/20 focus:border-rose-400/60
+                           focus:ring-2 focus:ring-rose-400/20 resize-none transition-all duration-200"
+                style={{ background: 'rgba(255,255,255,0.08)', backdropFilter: 'blur(8px)' }}
+              />
+              <button
+                onClick={sendMessage}
+                disabled={!message.trim()}
+                className="mt-2 w-full py-3 rounded-2xl text-white font-semibold tracking-wide
+                           transition-all duration-200 disabled:opacity-30 hover:brightness-110
+                           active:scale-95"
+                style={{ background: message.trim()
+                  ? 'linear-gradient(135deg,#e91e63,#ff5722)'
+                  : 'rgba(255,255,255,0.12)' }}>
+                {lang === 'vi' ? '💌 Gửi lời nhắn' : '💌 Send message'}
+              </button>
+            </>
+          ) : (
+            <p className="text-rose-200/80 text-sm italic text-center"
+               style={{ fontFamily: "'Playfair Display',serif" }}>
+              {lang === 'vi' ? '✨ Đã gửi lời nhắn rồi nhé ~' : '✨ Message sent ~'}
+            </p>
+          )}
+        </div>
       </div>
 
       {/* ── Bottom bar: Music + Language + Skip ── */}
